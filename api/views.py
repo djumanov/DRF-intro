@@ -10,3 +10,10 @@ def get_companies(request: Request) -> Response:
     company = Company.objects.get(name=com)
     data = CompaySerailizer(company).data
     return Response({'company': data})
+
+
+@api_view(['GET'])
+def get_products(request: Request) -> Response:
+    products = Product.objects.all()
+    products_json = [ProductSerailizer(p).data for p in products]
+    return Response({'products': products_json})
