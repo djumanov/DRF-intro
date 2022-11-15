@@ -6,6 +6,7 @@ from .models import Company, Product
 
 @api_view(['GET'])
 def get_companies(request: Request) -> Response:
-    company = Company.objects.get(id=1)
+    com = request.query_params['company']
+    company = Company.objects.get(name=com)
     data = CompaySerailizer(company).data
     return Response({'company': data})
